@@ -164,7 +164,7 @@ function showMainSection() {
 
 logo.addEventListener("click", showMainSection);
 
-const defaultSubcategoryImg = "assets/images/default-product.png";
+const defaultSubcategoryImg = "./assets/images/default-product.png";
 
 function renderSubCategories(slugName, pushState = true) {
   const category = state.products.find((element) => {
@@ -215,11 +215,10 @@ function renderSubCategories(slugName, pushState = true) {
 
 function renderProducts(list, categoryName) {
   productsGridContainer.innerHTML = list
-    .map(
-      (product) => {
-        const isLiked = state.liked.includes(product.id);
+    .map((product) => {
+      const isLiked = state.liked.includes(product.id);
 
-        return `
+      return `
                 <article class="product__card" data-id="${product.id}">
               <div class="product__image">  
                 <button class="wishlist-btn">
@@ -243,8 +242,7 @@ function renderProducts(list, categoryName) {
               </div>
             </article>
     `;
-      }
-    )
+    })
     .join("");
 
   productListTitle.textContent = categoryName;
@@ -283,8 +281,6 @@ function handleProductList(e) {
     const cardId = Number(card.dataset.id);
 
     if (likeBtn) {
-      
-
       const index = state.liked.indexOf(cardId);
 
       if (index === -1) {
@@ -293,8 +289,7 @@ function handleProductList(e) {
         state.liked.splice(index, 1);
       }
 
-
-      localStorage.setItem("liked" , JSON.stringify(state.liked))
+      localStorage.setItem("liked", JSON.stringify(state.liked));
 
       const icon = likeBtn.querySelector("i");
 
@@ -310,22 +305,17 @@ productsGridContainer.addEventListener("click", handleProductList);
 
 function updateURL(page, slug = "") {
   if (page === "main") {
-    history.pushState({ page: "main" }, "", "/");
+    window.location.hash = "";
   } else if (page === "subcategory") {
-    history.pushState(
-      { page: "subcategory", slug: slug },
-      "",
-      `?category=${slug}`,
-    );
+    window.location.hash = slug;
   }
 }
 
-window.addEventListener("popstate", (event) => {
-  const stateObj = event.state;
-
-  if (!stateObj || stateObj.page === "main") {
+window.addEventListener("hashchange", () => {
+  const hash = window.location.hash.replace("#", "");
+  if (!hash) {
     showMainSection();
-  } else if (stateObj.page === "subcategory") {
-    renderSubCategories(stateObj.slug, false);
+  } else {
+    renderSubCategories(hash, false);
   }
 });
