@@ -1,0 +1,108 @@
+/* --------------------- Media Queries --------------------- */
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1000px;
+  }
+  .top__header-wrapper {
+    display: none;
+  }
+  .favorites span,
+  .cart span {
+    display: none;
+  }
+
+  .main__header {
+    grid-template-columns: auto auto auto 1fr auto;
+  }
+
+  .hamburger__menu {
+    display: block;
+  }
+
+  .banner_ads,
+  .banner_bottom {
+    display: none;
+  }
+
+  .main_banner {
+    width: 100%;
+  }
+
+  .categories {
+    width: 40%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/*  tablet için  */
+@media (max-width: 992px) {
+  .container {
+    max-width: 730px;
+  }
+  .categories {
+    display: none;
+  }
+
+  .banner_ads {
+    display: flex;
+  }
+
+  .search__form input[type="search"] {
+    padding: 8px 3px;
+    width: 50%;
+  }
+
+  .search__form button {
+    width: 50%;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+
+  .location {
+    display: none;
+  }
+  .catalog__wrapper {
+    display: none;
+  }
+  .search__form {
+    display: none;
+  }
+
+  .main__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo img {
+    width: 100%;
+    height: auto;
+  }
+
+  .logo {
+    width: 116px;
+  }
+
+  .banner_ads,
+  .banner_bottom {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
