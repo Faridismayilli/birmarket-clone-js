@@ -164,7 +164,7 @@ function showMainSection() {
 
 logo.addEventListener("click", showMainSection);
 
-const defaultSubcategoryImg = "../assets/images/default-product.png";
+const defaultSubcategoryImg = "assets/images/default-product.png";
 
 function renderSubCategories(slugName, pushState = true) {
   const category = state.products.find((element) => {
