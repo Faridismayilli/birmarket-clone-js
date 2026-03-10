@@ -305,17 +305,22 @@ productsGridContainer.addEventListener("click", handleProductList);
 
 function updateURL(page, slug = "") {
   if (page === "main") {
-    window.location.hash = "";
+    history.pushState({ page: "main" }, "", "/");
   } else if (page === "subcategory") {
-    window.location.hash = slug;
+    history.pushState(
+      { page: "subcategory", slug: slug },
+      "",
+      `?category=${slug}`,
+    );
   }
 }
 
-window.addEventListener("hashchange", () => {
-  const hash = window.location.hash.replace("#", "");
-  if (!hash) {
+window.addEventListener("popstate", (event) => {
+  const stateObj = event.state;
+
+  if (!stateObj || stateObj.page === "main") {
     showMainSection();
-  } else {
-    renderSubCategories(hash, false);
+  } else if (stateObj.page === "subcategory") {
+    renderSubCategories(stateObj.slug, false);
   }
 });
